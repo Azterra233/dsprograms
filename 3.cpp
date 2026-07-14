@@ -5,7 +5,8 @@ using namespace std;
 template<typename T>
 class array_op{
     T a[100];
-    int n,i,s=0;
+    int n,i;
+    T s;
     public:
         void readdata();
         T findarraysum(T a);
@@ -20,22 +21,25 @@ template<typename T> void array_op<T>::readdata(){
     }
 }
 template<typename T> void array_op<T>::display(){
-    cout<<"The elements\n";
+    cout<<"The elements:\n";
     for(i=0;i<n;i++){
         cout<<a[i]<<" ";
     }
 } 
 template<typename T> T array_op<T>::findarraysum(T key){
+    s = a[0];
     for(i=0;i<n;i++){
-        s = a[i]+key;
+        s += a[i];
     }
+    s+=key;
     return s;
 }
 int main(){
     array_op<int> ob1;
     ob1.readdata();
     ob1.display();
-    cout<<"Array Sum "<<ob1.findarraysum(7)<<endl;
+    cout<<"\nArray Sum with key = "<<ob1.findarraysum(7)<<endl;
+    cout<<"Array sum without key = "<<ob1.findarraysum(0)<<endl;
     array_op<string> ob2;
     ob2.readdata();
     ob2.display();
