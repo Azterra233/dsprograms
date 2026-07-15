@@ -2,7 +2,7 @@
 template <class T>
 array<T>::array(){
     int i;
-    std::cout<<"Enter the lower bound of array: ";
+    std::cout<<"Enter the lower bound of array: ";       //no using namespace std; to prevent 'array' ambiguos error
     std::cin>>lb;
     std::cout<<"Enter the upper bound of array: ";
     std::cin>>ub;
