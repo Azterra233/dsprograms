@@ -1,4 +1,4 @@
-// Array using Template 
+// Array operations using Template 
 #include<iostream>
 #include<string>
 using namespace std;

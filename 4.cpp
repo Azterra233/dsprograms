@@ -1,4 +1,4 @@
-// Bubble sort
+// Bubble sort and sum of array elements
 #include<iostream>
 using namespace std;
 int main(){
@@ -17,7 +17,7 @@ int main(){
         cout<<a[i]<<" ";
     }
     cout<<"]"<<"\n";
-    //bubble sort
+    //bubble sort logic
     for(i=0;i<n-1;i++){
         for(j=0;j<n-i-1;j++){
             if(a[j]>a[j+1]){
