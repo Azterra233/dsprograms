@@ -1,4 +1,4 @@
-// Array using Template 
+// Array operations using Template 
 #include<iostream>
 #include<string>
 using namespace std;
@@ -45,3 +45,4 @@ int main(){
     ob2.display();
     return 0;
 }
+
