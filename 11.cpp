@@ -1,8 +1,8 @@
-// insertion operation on array direct - beginning
+// deletion operation at position - direct
 #include<iostream>
 using namespace std;
 int main(){
-    int a[20],i,ub,lb,val;
+    int a[20],i,lb,ub,pos;
     cout<<"Enter the lower and upper bounds of array: ";
     cin>>lb>>ub;
     cout<<"Enter elements:\n";
@@ -16,19 +16,18 @@ int main(){
         cout<<" "<<a[i];
     }
     cout<<"]\n";
-    // insertion at beginning logic
-    cout<<"\nEnter the value to insert: ";
-    cin>>val;
-    for(i=ub-1;i>=lb;i--){
-        a[i+1] = a[i];
+    cout<<"Enter position(index): ";
+    cin>>pos;
+    // deletion at position logic
+    for(i=pos;i<=ub-1;i++){
+        a[i] = a[i+1];
     }
-    a[lb] = val;
-    ub++;
+    ub--;
     cout<<"\nNew Array:\n";
     cout<<"[";
     for(i=lb;i<ub;i++){
         cout<<" "<<a[i];
     }
-    cout<<"]";
+    cout<<"]\n";
     return 0;
 }

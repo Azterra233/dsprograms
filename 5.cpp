@@ -4,6 +4,7 @@
 using namespace std;
 int main(){
     int a[20],n,i,j,key;
+    // make n print array
     cout<<"Enter the no. of array elements: ";
     cin>>n;
     cout<<"Enter elements:\n";
@@ -17,6 +18,7 @@ int main(){
         cout<<" "<<a[i];
     }
     cout<<"]";
+    // insertion sort logic
     for(i=1;i<n;i++){
         key = a[i];
         j = i-1;
