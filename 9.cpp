@@ -16,7 +16,7 @@ int main(){
         cout<<" "<<a[i];
     }
     cout<<"]\n";
-    // delete at beginning logic
+    // deletion at beginning logic
     for(i=lb;i<=ub-1;i++){
         a[i] = a[i+1];
     }

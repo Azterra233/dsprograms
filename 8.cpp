@@ -18,6 +18,7 @@ int main(){
     cout<<"]\n";
     cout<<"\nEnter value to insert: ";
     cin>>val;
+    // insertion at position logic
     cout<<"Enter position(index): ";
     cin>>pos;
     for(i=ub-1;i>=pos;i--){

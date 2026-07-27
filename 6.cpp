@@ -16,7 +16,7 @@ int main(){
         cout<<" "<<a[i];
     }
     cout<<"]\n";
-    // insert value at front
+    // insertion at beginning logic
     cout<<"\nEnter the value to insert: ";
     cin>>val;
     for(i=ub-1;i>=lb;i--){
