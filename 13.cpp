@@ -44,7 +44,7 @@ int main(){
             high = mid - 1;
         }
     }if(!found){
-        cout<<"Element is not found in the array!\n";        
+        cout<<"Element not found!\n";        
     }
     return 0;
 }
