@@ -1,6 +1,6 @@
 // Merge sort
 // Ref: https://www.w3schools.com/dsa/dsa_algo_mergesort.php
-// divide n conquer dekho MIT divide n conquer fft
+// FFT Divide and conquer lecture - MIT
 #include<iostream>
 using namespace std;
 
