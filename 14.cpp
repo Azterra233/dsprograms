@@ -44,7 +44,6 @@ void mergesort(int a[], int lb, int ub){
     }
 }
 
-
 int main(){
     int a[20],i,lb,ub;
     cout<<"Enter the lower and upper bounds of array: ";
