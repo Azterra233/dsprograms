@@ -17,7 +17,7 @@ int main(){
     for(i=0;i<n;i++){
         cout<<a[i]<<" ";
     }
-    cout<<"]"<<"\n";
+    cout<<"]\n";
     //bubble sort
     for(i=0;i<n-1;i++){
         for(j=0;j<n-i-1;j++){
@@ -34,5 +34,6 @@ int main(){
             cout<<a[i]<<" ";
     }
     cout<<"]"<<"\n";
+    cout<<"Sum of array elements = "<<sum;
     return 0;
 }
