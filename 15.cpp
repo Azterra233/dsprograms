@@ -27,7 +27,7 @@ void quicksort(int a[], int lb, int ub){
 }
 // main function - execution starts here
 int main(){
-    int a[20],n,i;
+    int a[20],n,;
     cout<<"Enter the no. of elements: ";
     cin>>n;
     cout<<"Enter elements:\n";
