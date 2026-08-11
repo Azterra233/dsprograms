@@ -1,4 +1,4 @@
-// Quick sort
+// Quick sort - Lomuto's Partition
 // https://www.w3schools.com/dsa/dsa_algo_quicksort.php
 #include<iostream>
 using namespace std;
@@ -8,7 +8,7 @@ int partition(int a[], int lb, int ub){
     pivot = a[ub];                    // Choosing the last element as pivot
     i = lb - 1;
     for(j=lb;j<ub;j++){
-        if(a[j]<=pivot){
+        if(a[j]<=pivot){              //Lomuto less than or equal to
             i++;
             swap(a[i],a[j]);          // function call to swap array values
         }
