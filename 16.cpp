@@ -1,4 +1,5 @@
 // Quick Sort - Hoare's Partition
+// https://www.geeksforgeeks.org/dsa/hoare-s-partition-algorithm/
 #include <iostream>
 using namespace std;
 
@@ -12,12 +13,12 @@ int partition(int a[], int lb, int ub) {
 
     while (true) {
 
-        // Move i from left until an element >= pivot is found
+        // Move i from left(to right) until an element >= pivot is found
         do {
             i++;
         } while (a[i] < pivot);
 
-        // Move j from right until an element <= pivot is found
+        // Move j from right(to left) until an element <= pivot is found
         do {
             j--;
         } while (a[j] > pivot);
