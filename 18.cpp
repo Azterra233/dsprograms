@@ -51,11 +51,15 @@ void Linkedlist::display() {
     if (start == NULL) {
         cout << "Linked list is empty\n";
     } else {
+        cout<<"\nLinked List:\n";
         while (temp != NULL) {
-            cout << temp->data << " -> ";
+            cout << temp->data;
             temp = temp->link;
+            if (temp != NULL) {
+                cout << " -> ";
+            }
         }
-        cout << "\nEND\n";
+        cout << endl;
     }
 }
 
