@@ -2,7 +2,13 @@
 #include<iostream>
 using namespace std;
 int main(){
-    struct node{
-
+    class Linkedlist{
+        struct node{
+            int data;
+            node *link;
+        }*start, *newnode, *link;
+    
+    
+    
     };
 }
