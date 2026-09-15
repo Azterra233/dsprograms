@@ -1,58 +1,71 @@
 // Write a cppp to create and display a linked list
-#include<iostream>                      // Preprocessor directive that includes the standard Input/Output Stream library for using cout and cin
-using namespace std;                    // Allows access to standard identifiers like cin, cout, and NULL without prefixing them with std::
+#include <iostream>  // Preprocessor directive that includes the standard Input/Output Stream library for using cout and cin
+using namespace std; // Allows access to standard identifiers like cin, cout, and NULL without prefixing them with std::
 
-class Linkedlist {                      // Declares a class named Linkedlist encapsulating the data structure and operations.
-    struct node {                       // Defines a custom structure node representing a single element of the linked list. Private by default within the class.
-        int data;                       // Integer variable storing data inside node
-        node *link;                     // Self-referential pointer that stores the memory address of the next node in the sequence.
-    } *start, *newnode, *temp;          // structure variables declaration 
-// closes the struct definition and declares three member pointers to node:
-// *start: Points to the first node (head) of the list.
-// *newnode: Holds the address of newly allocated nodes.
-// *temp: Temporary pointer used for traversing and building the list.
-    public:                                 // Access specifier making subsequent members accessible outside the class.
-        Linkedlist();                       // Default constructor; Constructor prototype called automatically when an object is instantiated.
-        void insert();                      // Member function prototype to accept input and append nodes to the list.
-        void display();                     // Member function prototype to traverse and print the elements.
-};                                          // Terminates class definition
+class Linkedlist
+{ // Declares a class named Linkedlist encapsulating the data structure and operations.
+    struct node
+    {                          // Defines a custom structure node representing a single element of the linked list. Private by default within the class.
+        int data;              // Integer variable storing data inside node
+        node *link;            // Self-referential pointer that stores the memory address of the next node in the sequence.
+    } *start, *newnode, *temp; // structure variables declaration
+                               // closes the struct definition and declares three member pointers to node:
+                               // *start: Points to the first node (head) of the list.
+                               // *newnode: Holds the address of newly allocated nodes.
+public:                        // Access specifier making subsequent members accessible outside the class.
+    Linkedlist();              // Default constructor; Constructor prototype called automatically when an object is instantiated.
+    void insert();             // Member function prototype to accept input and append nodes to the list.
+    void display();            // Member function prototype to traverse and print the elements.
+}; // Terminates class definition
 
-Linkedlist::Linkedlist() {                  //constructor definition using scope resolution operator
-    start = NULL;                           //Initializes the head pointer to NULL, marking the list as initially empty.
-    newnode = NULL;                         //Initializes the pointer to NULL to avoid dangling references.
-    temp = NULL;                            //Initializes the helper pointer to NULL
-}                                           //Closes the constructor block
+Linkedlist::Linkedlist()
+{                   // constructor definition using scope resolution operator
+    start = NULL;   // Initializes the head pointer to NULL, marking the list as initially empty.
+    newnode = NULL; // Initializes the pointer to NULL to avoid dangling references.
+    temp = NULL;    // Initializes the helper pointer to NULL
+} // Closes the constructor block
 
-void Linkedlist::insert() {                 //function definition for adding nodes
+void Linkedlist::insert()
+{ // function definition for adding nodes
     int num;
     char ch = 'y';
-    do {
+    do
+    {
         cout << "Enter the number: ";
         cin >> num;
-        newnode = new node;                 //Dynamically allocates memory on the heap for a single node and assigns its address to newnode
-        newnode->data = num;                //Assigns num to the data field of the new node
-        newnode->link = NULL;               //Sets the new node's next pointer to NULL since it will be appended to the end
-        if (start == NULL) {                //Checks whether the list is currently empty
-            start = temp = newnode;         //If empty, points both start and temp to this first node.
-        } else {                            //Runs if the list already contains at least one node.
-            temp->link = newnode;           //Connects the current last node (temp) to the newly created node.
-            temp = newnode;                 //Updates temp to point to the new end of the list.
-        }      
-        cout << "Do you wanna continue (y/n): ";        //Prompts the user whether to continue inserting nodes.
-        cin >> ch;                                      //Reads the response character into ch.
-    } while (ch == 'y');                                //Continues the loop if ch is 'y'.
-}                                                       //Closes the insert() function.
+        newnode = new node;   // Dynamically allocates memory on the heap for a single node and assigns its address to newnode
+        newnode->data = num;  // Assigns num to the data field of the new node
+        newnode->link = NULL; // Sets the new node's next pointer to NULL since it will be appended to the end
+        if (start == NULL)
+        {                           // Checks whether the list is currently empty
+            start = temp = newnode; // If empty, points both start and temp to this first node.
+        }
+        else
+        {                         // Runs if the list already contains at least one node.
+            temp->link = newnode; // Connects the current last node (temp) to the newly created node.
+            temp = newnode;       // Updates temp to point to the new end of the list.
+        }
+        cout << "Do you wanna continue (y/n): "; // Prompts the user whether to continue inserting nodes.
+        cin >> ch;                               // Reads the response character into ch.
+    } while (ch == 'y'); // Continues the loop if ch is 'y'.
+} // Closes the insert() function.
 
-void Linkedlist::display() {                            //Defines the traversal and display function.
+void Linkedlist::display()
+{ // Defines the traversal and display function.
     temp = start;
-    if (start == NULL) {
+    if (start == NULL)
+    {
         cout << "Linked list is empty\n";
-    } else {
-        cout<<"\nLinked List:\n";
-        while (temp != NULL) {
+    }
+    else
+    {
+        cout << "\nLinked List:\n";
+        while (temp != NULL)
+        {
             cout << temp->data;
             temp = temp->link;
-            if (temp != NULL) {
+            if (temp != NULL)
+            {
                 cout << " -> ";
             }
         }
@@ -60,7 +73,8 @@ void Linkedlist::display() {                            //Defines the traversal 
     }
 }
 
-int main() {
+int main()
+{
     Linkedlist list;
     list.insert();
     list.display();
