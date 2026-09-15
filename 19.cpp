@@ -3,12 +3,18 @@
 using namespace std;
 int main(){
     class Linkedlist{
-        struct node{
+        struct Node{
             int data;
-            node *link;
-        }*start, *newnode, *link;
-    
-    
-    
+            Node *next;
+        }*start=nullptr;
+        // Insert at beginning
+        void insert_beg(int item){
+            Node* new_node = new Node;
+            new_node -> data = item;
+            new_node -> next = nullptr;
+            new_node -> next = start;
+            start = new_node;
+        }
+
     };
 }
