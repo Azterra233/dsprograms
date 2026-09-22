@@ -5,5 +5,6 @@ Deletion: Beginning, Position, End
 Traversing linked list
 Linear search
 Reversal
+XOR linked list
 */
 
