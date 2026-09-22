@@ -22,9 +22,9 @@ int main(){
             Node* new_node = new Node;              // Node creation
             new_node -> data = item;                // Node creation
             new_node -> next = nullptr;             // Node creation
-            
-            Node ;
-
+            if (start == nullptr) {
+                start = new_node;
+            } else {
         }
 
     };
