@@ -4,7 +4,7 @@
 struct Node {
     int data;
     Node *prev = nullptr, *next = nullptr;
-    Node(int val) : data(val) {}
+    Node(int val) : data(val) {}                            //A constructor for the Node struct. When you create a new node, it automatically assigns the passed value (val) to data.
 };
 
 int main() {
