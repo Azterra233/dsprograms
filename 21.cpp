@@ -1,5 +1,6 @@
 // Doubly Linked List
 #include <iostream>
+using namespace std;
 
 struct Node {
     int data;
@@ -9,16 +10,16 @@ struct Node {
 
 int main() {
     int n, val, i;
-    std::cout << "Enter number of elements: ";
-    std::cin >> n;
+    cout << "Enter number of elements: ";
+    cin >> n;
 
     Node *head = nullptr, *tail = nullptr;
 
     // Reading elements
-    std::cout << "Enter values: ";
+    cout << "Enter values: ";
     for (i = 0; i < n; i++) {
-        std::cin >> val;
-        Node* newNode = new Node(val);
+        cin >> val;                                         //Node* is a pointer to a Node object 
+        Node* newNode = new Node(val);                      //memory created for a new `Node` containing the entered value.
         if (!head) {
             head = tail = newNode;                          //if head isn't nullptr, i.e this is the first node then....
         } else {
@@ -29,12 +30,13 @@ int main() {
     }
 
     // Printing 
-    std::cout << "\nDoubly Linked list:\n ";
-    std::cout<<"[";
-    for (Node* curr = head; curr; curr = curr->next)
-    std::cout << curr->data << " <-> ";
-    std::cout << "nullptr";
-    std::cout<<"]\n";
+    cout << "\nDoubly Linked list:\n ";
+    cout<<"[";
+    for (Node* curr = head; curr; curr = curr->next){
+        cout << curr->data << " <-> ";
+    }
+    cout << "nullptr";
+    cout<<"]\n";
     
     return 0;
 }
