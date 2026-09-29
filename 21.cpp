@@ -40,5 +40,5 @@ int main() {
         std::cout << curr->data << " <-> ";
     std::cout << "nullptr\n";
 
-    return ;
+    return 0;
 }
