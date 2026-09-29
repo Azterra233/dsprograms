@@ -40,10 +40,12 @@ public:
     // Display function to test the list
     void display() {
         Node* temp = start;
+        cout<<"[";
         while (temp != nullptr) {
-            cout << temp->data << " -> ";
+            cout << temp->data << " ";
             temp = temp->next;
         }
+        cout<<"]\n";
     }
 };
 
@@ -54,7 +56,7 @@ int main() {
     list.insert_end(20);
     list.insert_beg(5);
     
-    cout << "Linked List: ";
+    cout << "Linked List:\n";
     list.display();
     
     return 0;
