@@ -8,7 +8,7 @@ struct Node {
 };
 
 int main() {
-    int n, val;
+    int n, val, i;
     std::cout << "Enter number of elements: ";
     std::cin >> n;
 
@@ -16,7 +16,7 @@ int main() {
 
     // Reading elements
     std::cout << "Enter values: ";
-    for (int i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) {
         std::cin >> val;
         Node* newNode = new Node(val);
         if (!head) {
