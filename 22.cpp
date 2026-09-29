@@ -7,6 +7,11 @@ Linear search - iterative and recursive(ineffieciency why learn)
 Sorting
 Linked list Reversal - Iterative and Recursive 
 Searching Sorted list
+Doubly linked list
+Insertion operations Doubly linked list
+Deletion operations Doubly linked list
+Circular linked list
+Doubly circular linked list
 XOR linked list
 */
 
