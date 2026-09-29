@@ -16,7 +16,7 @@ int main() {
 
     // Reading elements
     std::cout << "Enter values: ";
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         std::cin >> val;
         Node* newNode = new Node(val);
         if (!head) {
