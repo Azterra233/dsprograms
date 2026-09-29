@@ -28,17 +28,13 @@ int main() {
         }
     }
 
-    // Printing forward
-    std::cout << "Forward:  ";
+    // Printing 
+    std::cout << "\nDoubly Linked list:\n ";
+    std::cout<<"[";
     for (Node* curr = head; curr; curr = curr->next)
-        std::cout << curr->data << " <-> ";
-    std::cout << "nullptr\n";
-
-    // Printing backward
-    std::cout << "Backward: ";
-    for (Node* curr = tail; curr; curr = curr->prev)
-        std::cout << curr->data << " <-> ";
-    std::cout << "nullptr\n";
-
+    std::cout << curr->data << " <-> ";
+    std::cout << "nullptr";
+    std::cout<<"]\n";
+    
     return 0;
 }
