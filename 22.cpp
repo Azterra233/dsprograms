@@ -15,6 +15,6 @@ Doubly circular linked list
 XOR linked list
 Stack
 Queue
-Postfix prefix
+Postfix prefix infix operation expression notation
 */
 
