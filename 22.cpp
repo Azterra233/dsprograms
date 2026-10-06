@@ -13,5 +13,8 @@ Deletion operations Doubly linked list
 Circular linked list
 Doubly circular linked list
 XOR linked list
+Stack
+Queue
+Postfix prefix
 */
 
