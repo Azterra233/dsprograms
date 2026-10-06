@@ -17,5 +17,18 @@ Stack
 Queue
 Postfix prefix infix operation expression notation
 */
-// Polish prefix
-// Reverse polish notation postfix
+
+/*
+Polish prefix
+Reverse polish notation postfix
+Operators ka priority order, rules, etc.
+When more ops come use associativity rule: usually left to right but not at all times.
+*/
+
+/*
+Infix to postfix conversion
+1. print operands as they arrive
+2. if the stack is empty or contains a left parenthesis on top,  push the incoming operator on to the stack.
+3. If the incoming symbol is "(" push it onto stack.
+*/
+
