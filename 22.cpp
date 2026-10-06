@@ -40,3 +40,15 @@ Infix to postfix conversion
     iii) if associativity is right to left then push the incoming operator.
 */
 
+/*
+Without using stack - 
+eqn: 1. A+B/C
+           = A + BC/
+           = ABC/+
+
+
+
+
+
+*/
+
