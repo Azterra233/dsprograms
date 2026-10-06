@@ -27,8 +27,13 @@ When more ops come use associativity rule: usually left to right but not at all 
 
 /*
 Infix to postfix conversion
+----------------------------
 1. print operands as they arrive
 2. if the stack is empty or contains a left parenthesis on top,  push the incoming operator on to the stack.
 3. If the incoming symbol is "(" push it onto stack.
+4. If the incoming symbol is ")", pop the stack and print the operator until left parenthesis is found.
+5. if incoming symbol is highest precedance than to top of stack, push it on the stack.
+6. if incoming symbol has lower precedence than top of stack, pop and print the top, then test the incoming operator against the new top of the stack.
+7. if the incoming operator has equal precedence with top of the stack use associative rule. 
 */
 
