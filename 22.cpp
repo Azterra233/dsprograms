@@ -35,5 +35,8 @@ Infix to postfix conversion
 5. if incoming symbol is highest precedance than to top of stack, push it on the stack.
 6. if incoming symbol has lower precedence than top of stack, pop and print the top, then test the incoming operator against the new top of the stack.
 7. if the incoming operator has equal precedence with top of the stack use associative rule. 
+    i)  At the end of expression pop and print all operators of the stack. 
+    ii) If associativity is left to right then pop and print the top of stack and then push the incoming operator.
+    iii) if associativity is right to left then push the incoming operator.
 */
 
