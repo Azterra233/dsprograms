@@ -1,194 +1,218 @@
-// Doubly Linked List
+// Menu driven operations on LL
 #include <iostream>
 using namespace std;
 
-struct Node {
-    int data;
-    Node *prev = nullptr, *next = nullptr;
-    Node(int val) : data(val) {}                            //A constructor for the Node struct. When you create a new node, it automatically assigns the passed value (val) to data.
+class Linkedlist {
+private:
+    struct Node {
+        int data;
+        Node *next;
+    } *start = nullptr;
+
+public:
+    // --- INSERTION OPERATIONS ---
+    // Insert at beginning
+    void insert_beg(int item) {
+        Node* new_node = new Node;
+        new_node->data = item;
+        new_node->next = start;
+        start = new_node;
+        cout << "Inserted " << item << " at the beginning.\n";
+    }
+
+    // Insert at end
+    void insert_end(int item) {
+        Node* new_node = new Node;              
+        new_node->data = item;               
+        new_node->next = nullptr;            
+
+        if (start == nullptr) {
+            start = new_node;
+        } else {
+            Node* temp = start;
+            while (temp->next != nullptr) {
+                temp = temp->next;
+            }
+            temp->next = new_node;
+        }
+        cout << "Inserted " << item << " at the end.\n";
+    }
+
+    // Insert at a specific position (1-based index)
+    void insert_pos(int item, int pos) {
+        if (pos < 1) {
+            cout << "Invalid position!\n";
+            return;
+        }
+
+        if (pos == 1) {
+            insert_beg(item);
+            return;
+        }
+
+        Node* temp = start;
+        // Traverse to the (pos - 1)-th node
+        for (int i = 1; i < pos - 1 && temp != nullptr; i++) {
+            temp = temp->next;
+        }
+
+        if (temp == nullptr) {
+            cout << "Position out of bounds!\n";
+            return;
+        }
+
+        Node* new_node = new Node;
+        new_node->data = item;
+        new_node->next = temp->next;
+        temp->next = new_node;
+        cout << "Inserted " << item << " at position " << pos << ".\n";
+    }
+
+    // --- DELETION OPERATIONS ---
+    // Delete from beginning
+    void delete_beg() {
+        if (start == nullptr) {
+            cout << "List is empty! Nothing to delete.\n";
+            return;
+        }
+        Node* temp = start;
+        start = start->next;
+        cout << "Deleted element: " << temp->data << " from the beginning.\n";
+        delete temp;
+    }
+
+    // Delete from end
+    void delete_end() {
+        if (start == nullptr) {
+            cout << "List is empty! Nothing to delete.\n";
+            return;
+        }
+
+        // If there's only one node
+        if (start->next == nullptr) {
+            cout << "Deleted element: " << start->data << " from the end.\n";
+            delete start;
+            start = nullptr;
+            return;
+        }
+
+        // Traverse to the second-to-last node
+        Node* temp = start;
+        while (temp->next->next != nullptr) {
+            temp = temp->next;
+        }
+
+        Node* last = temp->next;
+        cout << "Deleted element: " << last->data << " from the end.\n";
+        temp->next = nullptr;
+        delete last;
+    }
+
+    // Delete from a specific position (1-based index)
+    void delete_pos(int pos) {
+        if (pos < 1) {
+            cout << "Invalid position!\n";
+            return;
+        }
+        if (start == nullptr) {
+            cout << "List is empty! Nothing to delete.\n";
+            return;
+        }
+
+        if (pos == 1) {
+            delete_beg();
+            return;
+        }
+
+        Node* temp = start;
+        // Traverse to the (pos - 1)th node
+        for (int i = 1; i < pos - 1 && temp != nullptr; i++) {
+            temp = temp->next;
+        }
+
+        if (temp == nullptr || temp->next == nullptr) {
+            cout << "Position out of bounds!\n";
+            return;
+        }
+
+        Node* target = temp->next;
+        temp->next = target->next;
+        cout << "Deleted element: " << target->data << " from position " << pos << ".\n";
+        delete target;
+    }
+
+    // Display function
+    void display() {
+        Node* temp = start;
+        cout << "[";
+        while (temp != nullptr) {
+            cout << temp->data;
+            if (temp->next != nullptr) {
+                cout << ", ";
+            }
+            temp = temp->next;
+        }
+        cout << "]\n";
+    }
 };
 
 int main() {
-    int n, val, i;
-    cout << "Enter number of elements: ";
-    cin >> n;
+    Linkedlist list;
+    int choice, value, pos;
 
-    Node *head = nullptr, *tail = nullptr;
+    while (true) {
+        cout << "\n--- Linked List Operations ---\n";
+        cout << "1. Insert at Beginning\n";
+        cout << "2. Insert at End\n";
+        cout << "3. Insert at Specific Position\n";
+        cout << "4. Delete from Beginning\n";
+        cout << "5. Delete from End\n";
+        cout << "6. Delete from Specific Position\n";
+        cout << "7. Display List\n";
+        cout << "8. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-    // Reading elements
-    cout << "Enter values: ";
-    for (i = 0; i < n; i++) {
-        cin >> val;                                         //Node* is a pointer to a Node object 
-        Node* newNode = new Node(val);                      //memory created for a new `Node` containing the entered value.
-        if (!head) {
-            head = tail = newNode;                          //if head isn't nullptr, i.e this is the first node then....
-        } else {
-            tail->next = newNode;
-            newNode->prev = tail;
-            tail = newNode;
+        switch (choice) {
+            case 1:
+                cout << "Enter value: ";
+                cin >> value;
+                list.insert_beg(value);
+                break;
+            case 2:
+                cout << "Enter value: ";
+                cin >> value;
+                list.insert_end(value);
+                break;
+            case 3:
+                cout << "Enter value: ";
+                cin >> value;
+                cout << "Enter position (1-based): ";
+                cin >> pos;
+                list.insert_pos(value, pos);
+                break;
+            case 4:
+                list.delete_beg();
+                break;
+            case 5:
+                list.delete_end();
+                break;
+            case 6:
+                cout << "Enter position (1-based) to delete: ";
+                cin >> pos;
+                list.delete_pos(pos);
+                break;
+            case 7:
+                cout << "Current Linked List: ";
+                list.display();
+                break;
+            case 8:
+                cout << "Exiting...\n";
+                return 0;
+            default:
+                cout << "Invalid choice! Please try again.\n";
         }
     }
 
-    // Printing 
-    cout << "\nDoubly Linked list:\n ";
-    cout<<"[";
-    for (Node* curr = head; curr; curr = curr->next){
-        cout << curr->data << " <-> ";
-    }
-    cout << "nullptr";
-    cout<<"]\n";
-    
     return 0;
 }
-
-/*
-
-Here is a detailed, line-by-line explanation of your C++ Doubly Linked List program:
-
----
-
-### **1. Includes and Structure Definition**
-
-* `// Doubly Linked List`
-* A comment indicating that the program implements a doubly linked list data structure.
-
-
-* `#include <iostream>`
-* Includes the standard input/output stream library, allowing the program to use `std::cin` and `std::cout`.
-
-
-* `struct Node {`
-* Defines a custom data type named `Node` which represents a single element (or node) in the doubly linked list.
-
-
-* `int data;`
-* A member variable that stores the actual integer value inside the node.
-
-
-* `Node *prev = nullptr, *next = nullptr;`
-* Pointers to neighboring nodes: `prev` points to the previous node, and `next` points to the next node. Both are initialized to `nullptr` by default.
-
-
-* `Node(int val) : data(val) {}`
-* A constructor for the `Node` struct. When you create a new node, it automatically assigns the passed value (`val`) to `data`.
-
-
-
----
-
-### **2. Main Function & Initialization**
-
-* `int main() {`
-* The main execution entry point where the program starts running.
-
-
-* `int n, val;`
-* Declares two integer variables: `n` for the total number of elements the user wants to input, and `val` to temporarily hold each element's value.
-
-
-* `std::cout << "Enter number of elements: ";`
-* Displays a prompt asking the user how many nodes they want to create.
-
-
-* `std::cin >> n;`
-* Reads the user's input and stores it in `n`.
-
-
-* `Node *head = nullptr, *tail = nullptr;`
-* Declares and initializes two pointers: `head` tracks the beginning of the list, and `tail` tracks the end. Both start as `nullptr` because the list is initially empty.
-
-
-
----
-
-### **3. Reading and Building the List**
-
-* `// Reading elements`
-* A comment marking the input phase.
-
-
-* `std::cout << "Enter values: ";`
-* Prompts the user to type in the values for the elements.
-
-
-* `for (int i = 0; i < n; i++) {`
-* A loop that runs `n` times to read each value and insert it into the doubly linked list.
-
-
-* `std::cin >> val;`
-* Reads the current element value from the user into `val`.
-
-
-* `Node* newNode = new Node(val);`
-* Dynamically allocates memory in the heap to create a new `Node` containing the entered value.
-
-
-* `if (!head) {`
-* Checks if the list is currently empty (`head` is `nullptr`).
-
-
-* `head = tail = newNode;`
-* If it is the first node, both `head` and `tail` are pointed to this new node.
-
-
-* `} else {`
-* Executes if the list already contains one or more nodes.
-
-
-* `tail->next = newNode;`
-* Links the current last node (`tail`) forward to the new node.
-
-
-* `newNode->prev = tail;`
-* Links the new node backward to the previous tail node, completing the two-way connection.
-
-
-* `tail = newNode;`
-* Updates the `tail` pointer to point to the newly added node since it is now the last element.
-
-
-* `}`
-* Closes the `else` block and the `for` loop.
-
-
-
----
-
-### **4. Printing the List**
-
-* `// Printing`
-* A comment marking the output phase.
-
-
-* `std::cout << "\nDoubly Linked list:\n ";`
-* Prints a label header for the final list visualization.
-
-
-* `std::cout<<"[";`
-* Prints an opening bracket to format the list nicely.
-
-
-* `for (Node* curr = head; curr; curr = curr->next)`
-* A traversal loop: starts at `head`, continues as long as `curr` is not `nullptr`, and moves forward using `curr = curr->next` at each iteration.
-
-
-* `std::cout << curr->data << " <-> ";`
-* Prints the current node's data followed by `<->` to show the bidirectional linking.
-
-
-* `std::cout << "nullptr";`
-* Prints `nullptr` at the end of the chain to show where the list terminates.
-
-
-* `std::cout<<"]\n";`
-* Prints a closing bracket and adds a newline.
-
-
-* `return 0;`
-* Signals that the program has executed successfully.
-
-
-* `}`
-* Closes the `main` function.
-
-*/
