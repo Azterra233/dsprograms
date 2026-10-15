@@ -1,162 +1,195 @@
-// Dequeue using array
+// Infix to postfix and prefix
+#include <iostream>                         //for cin cout
+#include <string>                           //for string expressions
+#include <stack>                            //for LIFO approach
+#include <cctype>                           //to use utility functions like isalnum() to test alphanumeric char
+#include <algorithm>                        //to use reverse func
+#include <cmath>                            //for pow() function
 
-#include <iostream>
 using namespace std;
 
-#define MAX 5 // Maximum size of the dequeue
+bool isOperator(char c) {                   //helper function to check operator 
+    return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
+}
 
-class Dequeue {
-    int arr[MAX];
-    int front;
-    int rear;
-    int size;
-
-public:
-    Dequeue() {
-        front = -1;
-        rear = -1;
-        size = 0;
+int precedence(char op) {                   //helper function to return priority order of operator
+    switch (op) {
+    case '+':
+    case '-':
+        return 1;
+    case '*':
+    case '/':
+        return 2;
+    case '^':
+        return 3;
     }
+    return -1;
+}
 
-    bool isFull() {
-        return (size == MAX);
+// helper function to perform basic math operations
+double applyOp(double a, double b, char op) {
+    switch (op) {
+    case '+': return a + b;
+    case '-': return a - b;
+    case '*': return a * b;
+    case '/': return a / b;
+    case '^': return pow(a, b);
     }
+    return 0;
+}
 
-    bool isEmpty() {
-        return (size == 0);
-    }
+string infixToPostfix(const string &infix) {                //accepts an infix string and returns its postfix
+    string postfix = "";
+    stack<char> opStack;                                    //char type operator stack to temporarily hold operator and parenthesis
 
-    // Insert element at the front
-    void insertFront(int key) {
-        if (isFull()) {
-            cout << "Overflow! Dequeue is full.\n";
-            return;
+    for (char c : infix) {                                  //for loop to process input expression char by char from left to right
+        if (isalnum(c)) {                                   //check whether char c is an operand                          
+            postfix += c;                                   //operands pass to output string without entering stack
+        } 
+        else if (c == '(') {                                //to check opening parenthesis encountered or not
+            opStack.push(c);                                //yes, then push to opStack(The temporary Operator stack to hold operators such as '+', '-')
+        } 
+        else if (c == ')') {                                //triggered when closing parenthesis reached
+            while (!opStack.empty() && opStack.top() != '(') {
+                postfix += opStack.top();
+                opStack.pop();
+            }
+            if (!opStack.empty()) {
+                opStack.pop();                              // Remove '('
+            }
+        } 
+        else if (isOperator(c)) {
+            // For right-associative '^', change >= to > if strict exponentiation handling is required
+            while (!opStack.empty() && precedence(opStack.top()) >= precedence(c)) {
+                postfix += opStack.top();
+                opStack.pop();
+            }
+            opStack.push(c);
         }
+    }
 
-        if (isEmpty()) {
-            front = 0;
-            rear = 0;
-        } else if (front == 0) {
-            front = MAX - 1; // Wrap around
+    while (!opStack.empty()) {
+        postfix += opStack.top();
+        opStack.pop();
+    }
+
+    return postfix;
+}
+
+string infixToPrefix(const string &infix) {
+    string reversedInfix = "";
+    
+    //Reverse string and swap parentheses
+    for (int i = infix.length() - 1; i >= 0; i--) {            // i is the number of characters in string
+        if (infix[i] == '(') {
+            reversedInfix += ')';
+        } else if (infix[i] == ')') {
+            reversedInfix += '(';
         } else {
-            front = front - 1;
+            reversedInfix += infix[i];
         }
-
-        arr[front] = key;
-        size++;
-        cout << "Inserted " << key << " at the front.\n";
     }
 
-    // Insert element at the rear
-    void insertRear(int key) {
-        if (isFull()) {
-            cout << "Overflow! Dequeue is full.\n";
-            return;
-        }
+    //Convert modified infix to postfix with prefix precedence rules
+    string reversedPostfix = "";
+    stack<char> opStack;
 
-        if (isEmpty()) {
-            front = 0;
-            rear = 0;
-        } else if (rear == MAX - 1) {
-            rear = 0; // Wrap around
-        } else {
-            rear = rear + 1;
-        }
+    for (char c : reversedInfix) {
+        if (isalnum(c)) {
+            reversedPostfix += c;
+        } 
+        else if (c == '(') {
+            opStack.push(c);
+        } 
+        else if (c == ')') {
+            while (!opStack.empty() && opStack.top() != '(') {
+                reversedPostfix += opStack.top();
+                opStack.pop();
+            }
+            if (!opStack.empty()) {
+                opStack.pop(); // Remove '('
+            }
+        } 
+        else if (isOperator(c)) {
+            while (!opStack.empty() && opStack.top() != '(') {
+                int p1 = precedence(opStack.top());
+                int p2 = precedence(c);
 
-        arr[rear] = key;
-        size++;
-        cout << "Inserted " << key << " at the rear.\n";
+                // For reversed prefix string:
+                // Left-associative (+,-,*,/) use strictly >
+                // Right-associative (^) uses >=
+                if ((c == '^' && p1 >= p2) || (c != '^' && p1 > p2)) {
+                    reversedPostfix += opStack.top();
+                    opStack.pop();
+                } else {
+                    break;
+                }
+            }
+            opStack.push(c);
+        }
     }
 
-    // Delete element from the front
-    void deleteFront() {
-        if (isEmpty()) {
-            cout << "Underflow! Dequeue is empty.\n";
-            return;
-        }
-
-        cout << "Deleted " << arr[front] << " from the front.\n";
-
-        if (front == rear) {
-            // Queue has only one element
-            front = -1;
-            rear = -1;
-        } else if (front == MAX - 1) {
-            front = 0; // Wrap around
-        } else {
-            front = front + 1;
-        }
-        size--;
+    while (!opStack.empty()) {
+        reversedPostfix += opStack.top();
+        opStack.pop();
     }
 
-    // Delete element from the rear
-    void deleteRear() {
-        if (isEmpty()) {
-            cout << "Underflow! Dequeue is empty.\n";
-            return;
+    //Reverse postfix to get final prefix expression
+    string prefix = reversedPostfix;
+    reverse(prefix.begin(), prefix.end());
+
+    return prefix;
+}
+
+// evaluate postfix by scanning left to right
+double evaluatePostfix(const string &postfix) {
+    stack<double> st;                                       // stack to store numerical operands during evaluation
+
+    for (char c : postfix) {                                // scan postfix string from left to right
+        if (isdigit(c)) {
+            st.push(c - '0');                               // convert char digit to integer and push to stack
+        } else if (isOperator(c)) {
+            double op2 = st.top(); st.pop();                // pop second operand
+            double op1 = st.top(); st.pop();                // pop first operand
+            st.push(applyOp(op1, op2, c));                  // evaluate op1 operator op2 and push result
         }
+    }
+    return st.top();
+}
 
-        cout << "Deleted " << arr[rear] << " from the rear.\n";
+// evaluate prefix by scanning right to left
+double evaluatePrefix(const string &prefix) {
+    stack<double> st;                                       // stack to store numerical operands during evaluation
 
-        if (front == rear) {
-            // Queue has only one element
-            front = -1;
-            rear = -1;
-        } else if (rear == 0) {
-            rear = MAX - 1; // Wrap around
-        } else {
-            rear = rear - 1;
+    for (int i = prefix.length() - 1; i >= 0; i--) {        // scan prefix string from right to left
+        char c = prefix[i];
+        if (isdigit(c)) {
+            st.push(c - '0');                               // convert char digit to integer and push to stack
+        } else if (isOperator(c)) {
+            double op1 = st.top(); st.pop();                // pop first operand
+            double op2 = st.top(); st.pop();                // pop second operand
+            st.push(applyOp(op1, op2, c));                  // evaluate op1 operator op2 and push result
         }
-        size--;
     }
-
-    // Get the front element
-    int getFront() {
-        if (isEmpty()) return -1;
-        return arr[front];
-    }
-
-    // Get the rear element
-    int getRear() {
-        if (isEmpty()) return -1;
-        return arr[rear];
-    }
-
-    // Display elements of the circular dequeue from front to rear
-    void display() {
-        if (isEmpty()) {
-            cout << "Dequeue is empty!\n";
-            return;
-        }
-
-        cout << "\nDequeue elements (Front to Rear): ";
-        int i = front;
-        cout<<"[";
-        while (true) {
-            cout << arr[i] << " ";
-            if (i == rear)
-            break;
-            i = (i + 1) % MAX; // Circular increment
-        }
-        cout<<"]\n";
-    }
-};
+    return st.top();
+}
 
 int main() {
-    Dequeue dq;
+    string infix;
+    cout << "Enter the infix expression: ";
+    getline(cin, infix);                                    //getline to read entire line of expression including spaces
 
-    dq.insertRear(10);
-    dq.insertRear(20);
-    dq.insertFront(5);
-    
-    dq.display(); 
+    string postfix = infixToPostfix(infix);
+    string prefix = infixToPrefix(infix);
 
-    dq.deleteFront();
-    dq.display(); 
+    cout << "Postfix expression: " << postfix << endl;
+    cout << "Prefix expression: " << prefix << endl;
 
-    dq.insertRear(30);
-    dq.insertRear(40);
-    dq.display(); 
+    cout << "Postfix Evaluation result: " << evaluatePostfix(postfix) << endl;
+    cout << "Prefix Evaluation result: " << evaluatePrefix(prefix) << endl;
 
     return 0;
 }
+
+// Works only with single digits or chars
+// Both Postfix and Prefix expressions compute the same numerical result but their string representations and traversal orders are different.
