@@ -10,6 +10,14 @@ Searching Sorted list
 Doubly linked list
 Insertion operations Doubly linked list
 Deletion operations Doubly linked list
+finding kth node from last
+finding middle node from singly LL
+finding 2nd last node from singly LL and insert
+detect cycle or loop from singly LL
+merge 2 sorted singly LL 
+doubly reverse LL
+middle of doubly LL
+2nd last node address
 Circular linked list
 Doubly circular linked list
 XOR linked list
@@ -49,6 +57,31 @@ eqn: 1. A+B/C
 
 
 
+
+*/
+
+
+/*
+
+Program list
+1.Generic array operations 
+2.Array sorting and searching 
+3. Generic Linkedlist operations 
+4. Doubly linkedlist operations 
+5. Circular and doubly circular linkedlist operations 
+6. Polynomial addition and multiplication using linkedlist 
+7. Music playlist sorting using linkedlist
+8. Implementation of stack using array 
+9. Implementation of stack using linkedlist 
+10. Implementation of queue using array 
+11. Implementation of queue using linkedlist 
+12. Implementation of queue using circular array 
+13. Implementation of deque using doubly linkedlist 
+14. Infix to postfix conversion using stack 
+15. Postfix expression evaluation using stack
+16. Two way stack implementation 
+17. Implementation of binary tree using array 
+18. Implementation of binary tree using linkedlist
 
 */
 
