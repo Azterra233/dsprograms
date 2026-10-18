@@ -1,15 +1,15 @@
 /*
-Print and display
-Insertion: Beginning, Position, End
-Deletion: Beginning, Position, End
+Print and display /
+Insertion: Beginning, Position, End /
+Deletion: Beginning, Position, End / 
 Traversing linked list
 Linear search - iterative and recursive(ineffieciency why learn)
 Sorting
 Linked list Reversal - Iterative and Recursive 
 Searching Sorted list
-Doubly linked list
-Insertion operations Doubly linked list
-Deletion operations Doubly linked list
+Doubly linked list / 
+Insertion operations Doubly linked list /
+Deletion operations Doubly linked list /
 finding kth node from last
 finding middle node from singly LL
 finding 2nd last node from singly LL and insert
