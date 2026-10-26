@@ -124,7 +124,7 @@ public:
             return;
         }
 
-        Node* temp = start;
+        Node* temp = start; 
         // Traverse to the (pos - 1)th node
         for (int i = 1; i < pos - 1 && temp != nullptr; i++) {
             temp = temp->next;
